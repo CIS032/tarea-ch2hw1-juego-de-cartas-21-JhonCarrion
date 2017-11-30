@@ -1,41 +1,41 @@
 package blackjack;
 
 /**
- * An object of type Deck represents a mazo of playing cards. The mazo is a
- * regular poker mazo that contains 52 regular cards and that can also
- * optionally include two Jokers.
+ * Un objeto de tipo Deck representa un mazo de cartas. El mazo es un
+ * poker mazo regular que contiene 52 cartas regulares y que también puede
+ * opcionalmente incluye dos Jokers.
  */
 public class Mazo {
 
     /**
-     * An array of 52 or 54 cards. A 54-card mazo contains two Jokers, in
-     * addition to the 52 cards of a regular poker mazo.
+     * Una matriz de 52 o 54 cartas. Un mazo de 54 cartas contiene dos Jokers, en
+     * Además de las 52 cartas de un mazo de poker regular.
      */
     private Carta[] mazo;
 
     /**
-     * Keeps track of the number of cards that have been dealt from the mazo so
-     * far.
+     * Realiza un seguimiento de la cantidad de cartas que se han repartido desde el mazo para
+     * lejos.
      */
     private int cartasUsadas;
 
     /**
-     * Constructs a regular 52-card poker mazo. Initially, the cards are in a
-     * sorted order. The barajar() method can be called to randomize the order.
-     * (Note that "new Deck()" is equivalent to "new Deck(false)".)
+     * Construye un mazo de poker regular de 52 cartas. Inicialmente, las cartas están en una
+     * orden ordenado Se puede llamar al método barajar () para aleatorizar el orden.
+     * (Tenga en cuenta que "nuevo Deck ()" es equivalente a "nuevo Deck (falso)".)
      */
     public Mazo() {
-        this(false);  // Just call the other constructor in this class.
+        this(false);  // Simplemente llame al otro constructor en esta clase.
     }
 
     /**
-     * Constructs a poker mazo of playing cards, The mazo contains the usual 52
-     * cards and can optionally contain two Jokers in addition, for a total of
-     * 54 cards. Initially the cards are in a sorted order. The barajar() method
-     * can be called to randomize the order.
+     * Construye un póquer mazo de naipes, El mazo contiene los usuales 52
+     * tarjetas y opcionalmente puede contener dos Comodines además, para un total de
+     * 54 cartas. Inicialmente las cartas están ordenadas. El método barajar ()
+     * se puede llamar para aleatorizar el orden.
      *
-     * @param incluyeJokers if true, two Jokers are included in the mazo; if
-     * false, there are no Jokers in the mazo.
+     * @param incluyeJokers si true, dos comodines están incluidos en el mazo; Si
+     * false, no hay Jokers en el mazo.
      */
     public Mazo(boolean incluyeJokers) {
         if (incluyeJokers) {
@@ -43,7 +43,7 @@ public class Mazo {
         } else {
             mazo = new Carta[52];
         }
-        int contCartas = 0; // How many cards have been created so far.
+        int contCartas = 0; // Cuántas cartas se han creado hasta ahora.
         for (int palo = 0; palo <= 3; palo++) {
             for (int value = 1; value <= 13; value++) {
                 mazo[contCartas] = new Carta(value, palo);
@@ -58,8 +58,8 @@ public class Mazo {
     }
 
     /**
-     * Put all the used cards back into the mazo (if any), and barajar the mazo
-     * into a random order.
+     * Pon todas las cartas usadas nuevamente en el mazo (si hay), y barajar el mazo
+     * en un orden aleatorio.
      */
     public void barajar() {
         for (int i = mazo.length - 1; i > 0; i--) {
@@ -72,24 +72,24 @@ public class Mazo {
     }
 
     /**
-     * As cards are dealt from the mazo, the number of cards left decreases.
-     * This function returns the number of cards that are still left in the
-     * mazo. The return value would be 52 or 54 (depending on whether the mazo
-     * includes Jokers) when the mazo is first created or after the mazo has
-     * been barajard. It decreases by 1 each time the cartasReparto() method is
-     * called.
+     * A medida que las cartas se reparten desde el mazo, disminuye el número de cartas que quedan.
+     * Esta función devuelve la cantidad de tarjetas que aún quedan en el
+     * mazo El valor de retorno sería 52 o 54 (dependiendo de si el mazo
+     * incluye comodines) cuando se crea el mazo por primera vez o después de que el mazo tiene
+     * sido barajard Disminuye en 1 cada vez que se utiliza el método cartasReparto ()
+     * llamado.
      */
     public int cartasIzquierdas() {
         return mazo.length - cartasUsadas;
     }
 
     /**
-     * Removes the next card from the mazo and return it. It is illegal to call
-     * this method if there are no more cards in the mazo. You can check the
-     * number of cards remaining by calling the cartasIzquierdas() function.
+     * Quita la siguiente carta del mazo y la devuelve. Es ilegal llamar
+     * este método si no hay más cartas en el mazo. Usted puede verificar
+     * número de tarjetas restantes llamando a la función cartasIzquierdas ().
      *
-     * @return the card which is removed from the mazo.
-     * @throws IllegalStateException if there are no cards left in the mazo
+     * @return la carta que se elimina del mazo.
+     * @throws IllegalStateException si no quedan cartas en el mazo
      */
     public Carta cartasReparto() {
         if (cartasUsadas == mazo.length) {
@@ -97,19 +97,19 @@ public class Mazo {
         }
         cartasUsadas++;
         return mazo[cartasUsadas - 1];
-        // Programming note:  Cards are not literally removed from the array
-        // that represents the mazo.  We just keep track of how many cards
-        // have been used.
+        // Nota de programación: las tarjetas no se eliminan literalmente de la matriz
+        // eso representa el mazo. Simplemente hacemos un seguimiento de cuántas tarjetas
+        // ha sido usado.
     }
 
     /**
-     * Test whether the mazo contains Jokers.
+     * Prueba si el mazo contiene Jokers.
      *
-     * @return true, if this is a 54-card mazo containing two jokers, or false
-     * if this is a 52 card mazo that contains no jokers.
+     * @return true, si este es un mazo de 54 cartas que contiene dos comodines o false
+     * si este es un mazo de 52 cartas que no contiene comodines.
      */
     public boolean tieneJokers() {
         return (mazo.length == 54);
     }
 
-} // end class Deck
+}
