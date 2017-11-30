@@ -18,21 +18,21 @@ public class Blackjack {
     static String logstr = cal.get(Calendar.YEAR) + "/" + (cal.get(Calendar.MONTH) + 1) + "/" + cal.get(Calendar.DAY_OF_MONTH) + "\n";
 
     /**
-     * Let the user play one game of Blackjack, with the computer as dealer.
+     * Permita que el usuario juegue un juego de Blackjack, con la computadora como distribuidor.
      *
-     * @return true if the user wins the game, false if the user loses.
+     * @return true si el usuario gana el juego, es false si el usuario pierde.
      */
     static boolean playBlackjack() {
         Scanner sc = new Scanner(System.in);
-        Mazo mazo;                  // A mazo of cards.  A new mazo for each game.
-        ManoBlackjack manoDistribuidor;   // The dealer's hand.
-        ManoBlackjack manoUsuario;     // The user's hand.
+        Mazo mazo;                  // Una baraja de cartas. Una nueva baraja para cada juego.
+        ManoBlackjack manoDistribuidor;  
+        ManoBlackjack manoUsuario;    
 
         mazo = new Mazo();
         manoDistribuidor = new ManoBlackjack();
         manoUsuario = new ManoBlackjack();
 
-        /*  Shuffle the mazo, then deal two cards to each player. */
+        /*  Baraja el mazo, luego reparte dos cartas a cada jugador. */
         mazo.barajar();
         manoDistribuidor.agregarCarta(mazo.cartasReparto());
         manoDistribuidor.agregarCarta(mazo.cartasReparto());
@@ -45,8 +45,8 @@ public class Blackjack {
         System.out.println();
 
 
-        /* Check if one of the players has Blackjack (two cards totaling to 21).
-         The player with Blackjack wins the game.  Dealer wins ties.
+        /* Verifica si uno de los jugadores tiene Blackjack (dos cartas que suman un total de 21).
+         El jugador con Blackjack gana el juego. El distribuidor gana lazos.
          */
         if (manoDistribuidor.getBlackjackValor() == 21) {
             System.out.println("El distribuidor tiene el " + manoDistribuidor.getCarta(0)
@@ -80,14 +80,14 @@ public class Blackjack {
             return true;
         }
 
-        /*  If neither player has Blackjack, play the game.  First the user 
-         gets a chance to draw cards (i.e., to "Hit").  The while loop ends 
-         when the user chooses to "Stand".  If the user goes over 21,
-         the user loses immediately.
+        /*  Si ninguno de los jugadores tiene Blackjack, juega el juego. Primero el usuario
+         tiene la oportunidad de robar cartas (es decir, de "golpear"). El bucle while termina
+         cuando el usuario elige "Stand". Si el usuario supera los 21,
+         el usuario pierde inmediatamente.
          */
         while (true) {
 
-            /* Display user's cards, and let user decide to Hit or Stand. */
+            /* Muestre las cartas de usuario y deje que el usuario decida golpear o pararse. */
             Blackjack.logstr += "\n";
             Blackjack.logstr += "\n";
             System.out.println();
@@ -108,7 +108,7 @@ public class Blackjack {
             Blackjack.logstr += "\n";
             System.out.print("Hit (H) o Stand (S)? ");
             Blackjack.logstr += "Hit (H) o Stand (S)? ";
-            char userAction;  // User's response, 'H' or 'S'.
+            char userAction;  // Respuesta del usuario, 'H' or 'S'.
             do {
                 String entrada = sc.next();
                 userAction = Character.toUpperCase(entrada.charAt(0));
@@ -119,14 +119,14 @@ public class Blackjack {
                 }
             } while (userAction != 'H' && userAction != 'S');
 
-            /* If the user Hits, the user gets a card.  If the user Stands,
-             the loop ends (and it's the dealer's turn to draw cards).
+            /* Si el usuario tiene éxito, el usuario obtiene una carta. Si el usuario está parado,
+             el bucle termina (y es el turno del crupier de robar cartas).
              */
             if (userAction == 'S') {
-                // Loop ends; user is done taking cards.
+                // bucle termina; el usuario ha terminado de tomar cartas.
                 break;
-            } else {  // userAction is 'H'.  Give the user a card.  
-                // If the user goes over 21, the user loses.
+            } else {  // userAction es 'H'. Dale una tarjeta al usuario.
+                // Si el usuario supera los 21, el usuario pierde.
                 Carta newCard = mazo.cartasReparto();
                 manoUsuario.agregarCarta(newCard);
                 System.out.println();
@@ -150,11 +150,11 @@ public class Blackjack {
                 }
             }
 
-        } // end while loop
+        }
 
-        /* If we get to this point, the user has Stood with 21 or less.  Now, it's
-         the dealer's chance to draw.  Dealer draws cards until the dealer's
-         total is > 16.  If dealer goes over 21, the dealer loses.
+        /* Si llegamos a este punto, el usuario tiene Stood con 21 o menos. Ahora es
+         la oportunidad del distribuidor para dibujar. El distribuidor roba cartas hasta que el crupier
+         el total es> 16. Si el crupier supera los 21, el crupier pierde.
          */
         System.out.println();
         System.out.println("stands del Usuario.");
@@ -182,8 +182,8 @@ public class Blackjack {
         System.out.println("El total del distribuidor es " + manoDistribuidor.getBlackjackValor());
         Blackjack.logstr += "El total del distribuidor es " + manoDistribuidor.getBlackjackValor() + "\n";
 
-        /* If we get to this point, both players have 21 or less.  We
-         can determine the winner by comparing the values of their hands. */
+        /* Si llegamos a este punto, ambos jugadores tienen 21 o menos. Nosotros
+         puede determinar el ganador comparando los valores de sus manos. */
         System.out.println();
         Blackjack.logstr += "\n";
         if (manoDistribuidor.getBlackjackValor() == manoUsuario.getBlackjackValor()) {
@@ -204,22 +204,22 @@ public class Blackjack {
             return true;
         }
 
-    }  // end playBlackjack()
+    }
 
     /**
      * @param args the command line arguments
      */
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
-        int dolares;          // Amount of dolares the user has.
-        int apuesta;            // Amount user apuestas on a game.
-        boolean ganadas;   // Did the user win the game?
+        int dolares;          // Cantidad de dolares que tiene el usuario.
+        int apuesta;            // Cantidad de apuestas del usuario en un juego.
+        boolean ganadas;   // ¿Ganó el usuario el juego?
 
         System.out.println("Bienvenido al juego de blackjack.");
         System.out.println();
         Blackjack.logstr += "Bienvenido al juego de blackjack.\n\n";
 
-        dolares = 100;  // User starts with $100.
+        dolares = 100;  // El usuario inicia con $100.
 
         while (true) {
             System.out.println("Usted tiene " + dolares + " dolares.");
@@ -259,6 +259,6 @@ public class Blackjack {
         Blackjack.logstr += "\nTe vas con $" + dolares + '.';
         Blackjack.logstr += "\n";
         BlackjackLogs blackjackLogs = new BlackjackLogs(logstr);
-    } // end main()
+    }
 
 }
